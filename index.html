@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Redirector</title>
+    <style>
+        /* 加载动画样式 */
+        .loader {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #3498db;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3; /* Light grey */
+            border-top: 4px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 2s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 基础页面样式 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="loader">
+        <p>Redirecting...</p>
+        <div class="spinner"></div>
+    </div>
+
+    <script>
+        // 异步加载配置文件并处理跳转
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // 1. 获取 URL 参数中的 'sku' 值
+                const urlParams = new URLSearchParams(window.location.search);
+                const skuParam = urlParams.get('sku');
+
+                // 2. 加载配置文件
+                const response = await fetch('/videos.json');
+                const config = await response.json();
+
+                // 3. 获取目标视频 ID
+                const videoId = config.videos[skuParam?.toLowerCase()] || config.default_video;
+
+                // 4. 跳转到 YouTube 视频
+                window.location.href = `https://www.youtube.com/watch?v=${videoId}`;
+                
+            } catch (error) {
+                // 5. 错误处理：跳转到默认页面或提示错误
+                console.error("跳转失败:", error);
+                window.location.href = `https://www.youtube.com/watch?v=${config.default_video}`;
+            }
+        });
+    </script>
+</body>
+</html>
