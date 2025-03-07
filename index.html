@@ -45,26 +45,28 @@
     </div>
 
     <script>
-        // 异步加载配置文件并处理跳转
         document.addEventListener('DOMContentLoaded', async () => {
             try {
-                // 1. 获取 URL 参数中的 'sku' 值
+                // 获取参数
                 const urlParams = new URLSearchParams(window.location.search);
                 const skuParam = urlParams.get('sku');
-
-                // 2. 加载配置文件
-                const response = await fetch('/Redirect/videos.json');
+                console.log("参数:", skuParam); // 新增日志
+    
+                // 加载配置文件
+                const response = await fetch('/Redirect/videos.json'); // 根据仓库名调整路径
                 const config = await response.json();
-
-                // 3. 获取目标视频 ID
+                console.log("配置:", config); // 新增日志
+    
+                // 获取视频 ID
                 const videoId = config.videos[skuParam?.toLowerCase()] || config.default_video;
-
-                // 4. 跳转到 YouTube 视频
+                console.log("目标视频 ID:", videoId); // 新增日志
+    
+                // 跳转
                 window.location.href = `https://www.youtube.com/watch?v=${videoId}`;
                 
             } catch (error) {
-                // 5. 错误处理：跳转到默认页面或提示错误
-                console.error("跳转失败:", error);
+                console.error("错误:", error); // 新增日志
+                console.error("跳转失败，尝试跳转到默认视频");
                 window.location.href = `https://www.youtube.com/watch?v=${config.default_video}`;
             }
         });
