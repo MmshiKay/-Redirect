@@ -1,8 +1,8 @@
 {
   "videos": {
-    "SKU123": "dQw4w9WgXcQ",
-    "SKU456": "abcd1234",
-    "SKU789": "xyz7890"
+    "sku123": "dQw4w9WgXcQ",
+    "sku456": "abcd1234",
+    "sku789": "xyz7890"
   },
   "default_video": "dQw4w9WgXcQ"
 }
