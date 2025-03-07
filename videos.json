@@ -1,0 +1,8 @@
+{
+  "videos": {
+    "SKU123": "dQw4w9WgXcQ",  // 示例 SKU 对应的视频 ID
+    "SKU456": "abcd1234",     // 另一个示例 SKU
+    "SKU789": "xyz7890"       // 可添加更多映射...
+  },
+  "default_video": "dQw4w9WgXcQ"  // 默认视频 ID（当 SKU 不存在时使用）
+}
