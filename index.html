@@ -53,7 +53,7 @@
                 const skuParam = urlParams.get('sku');
 
                 // 2. 加载配置文件
-                const response = await fetch('/videos.json');
+                const response = await fetch('/Redirect/videos.json');
                 const config = await response.json();
 
                 // 3. 获取目标视频 ID
